@@ -1,0 +1,2 @@
+class ListenerNotFound(Exception):
+    pass

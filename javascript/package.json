@@ -1,0 +1,35 @@
+{
+  "name": "django-television",
+  "version": "0.1.0",
+  "description": "Front-end Javascript utilities for use with Django Channels",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack --progress --colors --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pztrick/django-television.git"
+  },
+  "author": "Patrick Paul",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pztrick/django-television/issues"
+  },
+  "homepage": "https://github.com/pztrick/django-television#readme",
+  "dependencies": {
+    "eventemitter2": "^4.1.2",
+    "moment": "^2.20.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "css-loader": "^0.28.9",
+    "style-loader": "^0.20.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "webpack": "^3.10.0"
+  }
+}
