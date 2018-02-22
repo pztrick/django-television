@@ -1,6 +1,6 @@
 # Django Television
 
-Television is small library wrapping most of the configuration required for Channels `1.x` through the use of simple, opinionated Python decorators. It also includes a JavaScript library for use in the front-end.
+Television is small websockets library wrapping most of the configuration required for [Channels](https://github.com/django/channels) `1.x` through the use of simple, opinionated Python decorators. It also includes a JavaScript library for use in the front-end.
 
 Python event listeners are declared using the `@television.add_listener` decorator.
 
@@ -188,7 +188,7 @@ Television.on('app.contact', (payload)=>{
 });
 ```
 
-## Decorators
+### Decorators
 
 A handful of other decorators for listeners are available, including `require_auth`, `require_staff`, and `require_superuser`.
 
@@ -231,6 +231,12 @@ def add_staff_user(message, email):
     }
 
 ```
+
+### Other utilities
+
+Staff and superusers are automatically added to Channels groups named `staff` and `superusers`, respectively.
+
+You can use `television.utils.staff_log` to send a log statement over the websocket to all staff users. This is useful for long-running asynchronous tasks or in addition to `logger` or `print` statements.
 
 ## FAQ
 
