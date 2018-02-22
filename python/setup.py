@@ -1,15 +1,25 @@
-from setuptools import setup
 from television import __version__
 
-# copy static assets into tree
+from setuptools import setup
+from setuptools.command.sdist import sdist
+
 import os
 import shutil
-directory = os.path.dirname(os.path.realpath(__file__))
-shutil.rmtree('%s/television/static' % (directory, ), ignore_errors=True)
-shutil.copytree(
-    '%s/../javascript/dist' % (directory, ),
-    '%s/television/static' % (directory, )
-)
+
+
+class SDistCommand(sdist):
+  """Custom build command."""
+
+  def run(self):
+    # copy static assets into tree
+    directory = os.path.dirname(os.path.realpath(__file__))
+    shutil.rmtree('%s/television/static' % (directory, ), ignore_errors=True)
+    shutil.copytree(
+        '%s/../javascript/dist' % (directory, ),
+        '%s/television/static' % (directory, )
+    )
+    super().run()
+
 
 setup(
     name='django-television',
@@ -20,6 +30,9 @@ setup(
         'Django>=1.11',
         'channels==1.1.8'
     ],
+    cmdclass={
+        'sdist': SDistCommand,
+    },
     author='Patrick Paul',
     author_email='patrick@astrohaus.com',
     description='Back-end Python utilities for use with Django Channels',
