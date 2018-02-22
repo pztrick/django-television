@@ -50,7 +50,7 @@ def ping(message):
 
 ```
 {% load static %}
-<script type="text/javascript" src="{% static "django-television.js" %}">
+<script type="text/javascript" src="{% static "django-television.js" %}"></script>
 ```
 
 5. Visit the web application in your browser at this template-view and open Chrome Dev Tools:
