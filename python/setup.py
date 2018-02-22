@@ -1,8 +1,10 @@
 from setuptools import setup
+from television import __version__
+
 
 setup(
     name='django-television',
-    version='0.1.0',
+    version=__version__,
     packages=['television'],
     scripts=[],
     install_requires=[
