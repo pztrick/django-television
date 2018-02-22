@@ -6,10 +6,9 @@ var config = {
     devtool: 'source-map',
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: "[name].js",
+        filename: "django-television.js",
         libraryTarget: "umd",
     },
-    watch: true,
     module: {
         rules: [
             {

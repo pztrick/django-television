@@ -1,4 +1,3 @@
-// var EventEmitter2 = require('eventemitter2');
 import './style.styl';
 import EventEmitter2 from 'eventemitter2';
 import moment from 'moment';

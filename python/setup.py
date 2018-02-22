@@ -1,6 +1,15 @@
 from setuptools import setup
 from television import __version__
 
+# copy static assets into tree
+import os
+import shutil
+directory = os.path.dirname(os.path.realpath(__file__))
+shutil.rmtree('%s/television/static' % (directory, ), ignore_errors=True)
+shutil.copytree(
+    '%s/../javascript/dist' % (directory, ),
+    '%s/television/static' % (directory, )
+)
 
 setup(
     name='django-television',
