@@ -267,7 +267,7 @@ channel_routing.extend(tv_routing)
 # Recommended to install as git-submodule to existing Django project
 cd /opt/project
 mkdir -p bundle
-git clone git@github.com:pztrick/django-television.git bundle/django-television
+git submodule add git@github.com:pztrick/django-television.git bundle/django-television
 
 # back-end module
 pip install -e /opt/project/bundle/django-television/python
