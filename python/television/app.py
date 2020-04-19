@@ -31,3 +31,7 @@ class AppConfig(AppConfig): # Our app config class
 
         import television.decorators
         television.decorators.APPS_FINISHED_LOADING = True
+
+        # 2) Register all bindings
+        from television.binding.base import BindingMetaclass
+        BindingMetaclass.register_all()

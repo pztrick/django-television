@@ -10,9 +10,9 @@ def timestamp():
     return datetime.datetime.now().strftime('%Y-%b-%d %H:%M:%S.%f')[:-3]
 
 
-def send_to_group(group, channel, payload):
+def send_to_group(group, stream, payload):
     channel_layer = get_channel_layer()
-    r = async_to_sync(channel_layer.group_send)(group, {'type': 'relay', 'stream': channel, 'payload': payload})
+    r = async_to_sync(channel_layer.group_send)(group, {'type': 'relay', 'stream': stream, 'payload': payload})
     return r
 
 
