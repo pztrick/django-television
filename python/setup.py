@@ -27,30 +27,30 @@ setup(
     packages=['television'],
     scripts=[],
     install_requires=[
-        'Django>=1.11',
-        'channels==1.1.8'
+        'channels>=2.4.0,==2.4.*',
+        'Django>=3.0.5,==3.0.*'
     ],
     cmdclass={
         'sdist': SDistCommand,
     },
     author='Patrick Paul',
-    author_email='patrick@astrohaus.com',
+    author_email='git@foosrank.com',
     description='Back-end Python utilities for use with Django Channels',
     license='MIT',
     # keywords='',
-    url='https://github.com/pztrick/django-television/',
+    url='https://github.com/pztrick/django-television',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
         'Framework :: Django',
-        'Framework :: Django :: 1.11',
+        'Framework :: Django :: 3.0',
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Topic :: Internet :: WWW/HTTP',
     ],
 )

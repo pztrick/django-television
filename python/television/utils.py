@@ -1,7 +1,9 @@
-from channels import Group
+# from channels import Group
 import json
 import hashlib
 import datetime
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 
 
 def timestamp():
@@ -9,7 +11,9 @@ def timestamp():
 
 
 def send_to_group(group, channel, payload):
-    return Group(group).send({'text': json.dumps({'stream': channel, 'payload': payload})})
+    channel_layer = get_channel_layer()
+    r = async_to_sync(channel_layer.group_send)(group, {'type': 'relay', 'stream': channel, 'payload': payload})
+    return r
 
 
 def staff_log(message):

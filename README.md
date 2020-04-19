@@ -8,11 +8,9 @@ Django models can be decorated to emit data-binding updates using the `@televisi
 
 A Javascript library is also provided to invoke these listeners with `Television.promise(...)` or to receive two-way data binding updates from Channels with `Television.bindState(...)`.
 
-*Channels `2.x` is not supported at this time. Requires Python 3.6 or newer.*
-
 ## Quickstart
 
-1. Install `django-television` in your Python 3.6+ project.
+1. Install `django-television` in your Python 3.7+ project.
 
 ```
 pip install django-television
@@ -27,11 +25,11 @@ INSTALLED_APPS = [
     'television'
 ]
 
+ASGI_APPLICATION = "television.routing.application"
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "asgiref.inmemory.ChannelLayer",
-        "ROUTING": "television.routing.channel_routing",
-    },
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
 }
 ```
 
