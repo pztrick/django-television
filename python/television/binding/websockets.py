@@ -98,8 +98,10 @@ class WebsocketBindingWithMembers(Binding):
                 fields = self.fields
         else:
             fields = [f.name for f in instance._meta.get_fields() if f.name not in self.exclude]
-        data = serializers.serialize('json', [instance], fields=fields)
-        return json.loads(data)[0]['fields']
+        data_json = serializers.serialize('json', [instance], fields=fields)
+        data = json.loads(data_json)[0]['fields']
+        data['pk'] = instance.pk
+        return data
 
     # Inbound
     @classmethod

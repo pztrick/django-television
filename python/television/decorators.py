@@ -73,8 +73,6 @@ def add_data_binding_staff(fields='__all__', send_members=[], exclude=[]):
     def decorate(model_class):
         nonlocal fields
 
-        send_members.append('pk')  # always send pk
-
         if fields == '__all__':
             fields = [x.name for x in model_class._meta.fields]
         elif fields == None:
@@ -115,8 +113,6 @@ def add_data_binding_staff(fields='__all__', send_members=[], exclude=[]):
 def add_data_binding_superuser(fields='__all__', send_members=[], exclude=[]):
     def decorate(model_class):
         nonlocal fields
-
-        send_members.append('pk')  # always send pk
 
         if fields == '__all__':
             fields = [x.name for x in model_class._meta.fields]
@@ -159,8 +155,6 @@ def add_data_binding_owner(fields='__all__', send_members=[], exclude=[], owner_
 
     def decorate(model_class):
         nonlocal fields
-
-        send_members.append('pk')  # always send pk
 
         if fields == '__all__':
             fields = [x.name for x in model_class._meta.fields]
