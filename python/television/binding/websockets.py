@@ -53,23 +53,6 @@ class WebsocketBindingWithMembers(Binding):
 
     encoder = DjangoJSONEncoder()
 
-    def serialize_data(self, instance, **kwargs):
-        data = super(WebsocketBindingWithMembers, self).serialize_data(instance, **kwargs)
-        member_data = {}
-        for m in self.send_members:
-            member = instance
-            for s in m.split('.'):
-                member = getattr(member, s)
-            if callable(member):
-                member_data[m.replace('.', '__')] = member()
-            else:
-                member_data[m.replace('.', '__')] = member
-        member_data = json.loads(self.encoder.encode(member_data))
-        # the update never overwrites any value from data,
-        # because an object can't have two attributes with the same name
-        data.update(member_data)
-        return data
-
     # Stream multiplexing name
     stream = None
 
@@ -91,6 +74,7 @@ class WebsocketBindingWithMembers(Binding):
         """
         Serializes model data into JSON-compatible types.
         """
+        print('television.bindings.websockets -> serialize_data')
         if self.fields is not None:
             if self.fields == '__all__' or list(self.fields) == ['__all__']:
                 fields = None
@@ -101,6 +85,20 @@ class WebsocketBindingWithMembers(Binding):
         data_json = serializers.serialize('json', [instance], fields=fields)
         data = json.loads(data_json)[0]['fields']
         data['pk'] = instance.pk
+
+        # add any extra properties passed via send_members=[...] argument
+        member_data = {}
+        for m in self.send_members:
+            member = instance
+            for s in m.split('.'):
+                member = getattr(member, s)
+            if callable(member):
+                member_data[m.replace('.', '__')] = member()
+            else:
+                member_data[m.replace('.', '__')] = member
+        member_data = json.loads(self.encoder.encode(member_data))
+        data.update(member_data)
+
         return data
 
     # Inbound
@@ -128,6 +126,7 @@ class WebsocketBindingWithMembers(Binding):
         You must hook this up behind a Deserializer, so we expect the JSON
         already dealt with.
         """
+        print('television.bindings.websockets -> deserialize')
         body = json.loads(message['text'])
         action = body['action']
         pk = body.get('pk', None)
